@@ -5,16 +5,18 @@ string bookMark = "SavedBooks.txt";
 bookBookshelf.Load(bookMark);
 while (loop)
 {
+    bookBookshelf.Save(bookMark);
     Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("------------------------");
-    Console.WriteLine("          MENU");
-    Console.WriteLine("------------------------");
+    Console.WriteLine("-----------------------------------");
+    Console.WriteLine("               MENU");
+    Console.WriteLine("-----------------------------------");
     Console.ResetColor();
     Console.WriteLine("1) Add book");
     Console.WriteLine("2) Show every saved book");
-    Console.WriteLine("3) Search for a book (by Author)");
-    Console.WriteLine("4) Search for a book (by Year)");
-    Console.WriteLine("5) Close program");
+    Console.WriteLine("3) Remove book");
+    Console.WriteLine("4) Search for a book (by Author)");
+    Console.WriteLine("5) Search for a book (by Year)");
+    Console.WriteLine("6) Save & Exit");
     ConsoleKeyInfo key = Console.ReadKey(true);
     switch (key.Key)
     {
@@ -25,12 +27,15 @@ while (loop)
             bookBookshelf.ShowEveryBook();
             break;
         case ConsoleKey.D3:
-            bookBookshelf.AuthorBook();
+            bookBookshelf.Remove();
             break;
         case ConsoleKey.D4:
-            bookBookshelf.YearBook();
+            bookBookshelf.AuthorBook();
             break;
         case ConsoleKey.D5:
+            bookBookshelf.YearBook();
+            break;
+        case ConsoleKey.D6:
             bookBookshelf.Save(bookMark);
             loop = false;
             break;

@@ -9,7 +9,7 @@ namespace Knihovna_knih
     class BookBookshelf
     {
         List<InfoBook> bookshelf = new List<InfoBook>();
-        public void CreateNewBook()
+        public void CreateNewBook()//creating new book
         {
             Console.Clear();
             InfoBook info = new InfoBook();
@@ -32,9 +32,9 @@ namespace Knihovna_knih
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Error: {ex.Message}");
                 Console.ResetColor();
-            }           
+            }
         }
-        public void ShowEveryBook()
+        public void ShowEveryBook()//shows every book
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -45,21 +45,22 @@ namespace Knihovna_knih
             {
                 foreach (InfoBook i in bookshelf)
                 {
-                    Console.WriteLine($"Book's name: {i.Name}   ,   Author's name: {i.Author}   ,   Year of release: {i.Year}");
+                    int index = bookshelf.IndexOf(i) + 1;
+                    Console.WriteLine($"{index}) Book's name: {i.Name}  |    Author's name: {i.Author}   |   Year of release: {i.Year}");//how it will show every book
                 }
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("         **Bookshelf is empty**");
-                Console.ResetColor ();
-            }          
+                Console.ResetColor();
+            }
         }
         public void AuthorBook()
         {
             InfoBook info = new InfoBook();
             Console.Clear();
-            if(bookshelf.Count > 0)
+            if (bookshelf.Count > 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("         Search for a book by Author's name");
@@ -74,8 +75,8 @@ namespace Knihovna_knih
                     {
                         Console.WriteLine("--------------------------");
                         Console.WriteLine($"Book's name: {Authors.Name}");
-                        Console.WriteLine($"Year of release: {Authors.Year}");
                         Console.WriteLine($"Name of author: {Authors.Author}");
+                        Console.WriteLine($"Year of release: {Authors.Year}");
                     }
                     else
                     {
@@ -91,10 +92,10 @@ namespace Knihovna_knih
             }
             else
             {
-                Console.ForegroundColor= ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("  **Enter book first**");
                 Console.ResetColor();
-            }       
+            }
         }
         public void YearBook()
         {
@@ -135,7 +136,7 @@ namespace Knihovna_knih
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("  **Enter book first**");
                 Console.ResetColor();
-            }           
+            }
         }
         public void Save(string bookMark)
         {
@@ -143,32 +144,34 @@ namespace Knihovna_knih
             {
                 using (StreamWriter sw = new StreamWriter(bookMark))
                 {
-                    foreach(InfoBook i in bookshelf)
+                    foreach (InfoBook i in bookshelf)
                     {
                         string line = $"{i.Name}, {i.Author}, {i.Year}";
                         sw.WriteLine(line);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.ResetColor();
             }
         }
         public void Load(string bookMark)
         {
             try
             {
-                if (File.Exists(bookMark))
+                if (File.Exists(bookMark))//load test
                 {
-                    Console.WriteLine(" File was succefuly loaded");
-                    using(StreamReader sr = new StreamReader(bookMark))
+                    Console.WriteLine(" File was succefuly loaded/saved");
+                    using (StreamReader sr = new StreamReader(bookMark))
                     {
                         string line;
-                        while((line = sr.ReadLine()) != null)
+                        while ((line = sr.ReadLine()) != null)
                         {
                             string[] parts = line.Split(',');
-                            if(parts.Length == 3)
+                            if (parts.Length == 3)
                             {
                                 string name = parts[0];
                                 string author = parts[1];
@@ -181,6 +184,12 @@ namespace Knihovna_knih
                                 };
                                 bookshelf.Add(book);
                             }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"****FATAL ERROR****");
+                                Console.ResetColor();
+                            }
                         }
                     }
                 }
@@ -191,7 +200,39 @@ namespace Knihovna_knih
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Error: {ex.Message}");
+                Console.ResetColor();
+            }
+        }
+        public void Remove()
+        {
+            Console.Clear();
+            InfoBook info = new InfoBook();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("                   Remove book");
+            Console.WriteLine("----------------------------------------------------");
+            Console.ResetColor();
+            try
+            {
+                Console.WriteLine("Write book's name: ");
+                string removedBookName = Console.ReadLine();
+                InfoBook removedBook = bookshelf.Find(info => info.Name.Contains(removedBookName));
+                if (removedBook != null)
+                {
+                    bookshelf.Remove(removedBook);
+                    Console.WriteLine("Book was removed");
+                }
+                else
+                {
+                    Console.WriteLine("Book's name does not exist");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.ResetColor();
             }
         }
     }
