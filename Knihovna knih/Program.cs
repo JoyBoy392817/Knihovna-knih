@@ -1,6 +1,8 @@
 ﻿using Knihovna_knih;
 BookBookshelf bookBookshelf = new BookBookshelf();
 bool loop = true;
+string bookMark = "SavedBooks.txt";
+bookBookshelf.Load(bookMark);
 while (loop)
 {
     Console.ForegroundColor = ConsoleColor.Green;
@@ -29,6 +31,7 @@ while (loop)
             bookBookshelf.YearBook();
             break;
         case ConsoleKey.D5:
+            bookBookshelf.Save(bookMark);
             loop = false;
             break;
         default:

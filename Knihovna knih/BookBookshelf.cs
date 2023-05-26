@@ -72,8 +72,8 @@ namespace Knihovna_knih
                     InfoBook Authors = bookshelf.Find(info => info.Author.Contains(AuthorsName));
                     if (Authors != null)
                     {
-                        Console.WriteLine($"Book's name: {Authors.Name}");
                         Console.WriteLine("--------------------------");
+                        Console.WriteLine($"Book's name: {Authors.Name}");
                         Console.WriteLine($"Year of release: {Authors.Year}");
                         Console.WriteLine($"Name of author: {Authors.Author}");
                     }
@@ -113,8 +113,8 @@ namespace Knihovna_knih
                     InfoBook foundYear = bookshelf.Find(info => info.Year == year);
                     if (foundYear != null)
                     {
-                        Console.WriteLine($"Book's name: {foundYear.Name}");
                         Console.WriteLine("--------------------------");
+                        Console.WriteLine($"Book's name: {foundYear.Name}");
                         Console.WriteLine($"Year of release: {foundYear.Year}");
                         Console.WriteLine($"Name of author: {foundYear.Author}");
                     }
@@ -136,6 +136,63 @@ namespace Knihovna_knih
                 Console.WriteLine("  **Enter book first**");
                 Console.ResetColor();
             }           
+        }
+        public void Save(string bookMark)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(bookMark))
+                {
+                    foreach(InfoBook i in bookshelf)
+                    {
+                        string line = $"{i.Name}, {i.Author}, {i.Year}";
+                        sw.WriteLine(line);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void Load(string bookMark)
+        {
+            try
+            {
+                if (File.Exists(bookMark))
+                {
+                    Console.WriteLine(" File was succefuly loaded");
+                    using(StreamReader sr = new StreamReader(bookMark))
+                    {
+                        string line;
+                        while((line = sr.ReadLine()) != null)
+                        {
+                            string[] parts = line.Split(',');
+                            if(parts.Length == 3)
+                            {
+                                string name = parts[0];
+                                string author = parts[1];
+                                int year = int.Parse(parts[2]);
+                                InfoBook book = new InfoBook()
+                                {
+                                    Name = name,
+                                    Author = author,
+                                    Year = year
+                                };
+                                bookshelf.Add(book);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("  File does not exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }
