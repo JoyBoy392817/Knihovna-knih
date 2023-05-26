@@ -217,7 +217,7 @@ namespace Knihovna_knih
             {
                 Console.WriteLine("Write book's name: ");
                 string removedBookName = Console.ReadLine();
-                InfoBook removedBook = bookshelf.Find(info => info.Name.Contains(removedBookName));
+                InfoBook removedBook = bookshelf.Find(info => info.Name.Contains(removedBookName));// nefunguje maže když je to prázdný
                 if (removedBook != null)
                 {
                     bookshelf.Remove(removedBook);
