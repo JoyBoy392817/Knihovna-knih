@@ -3,12 +3,12 @@ BookBookshelf bookBookshelf = new BookBookshelf();
 bool loop = true;
 string bookMark = "SavedBooks.txt";
 bookBookshelf.Load(bookMark);
-while (loop)
+while (loop)//cycle for menu and operations
 {
     bookBookshelf.Save(bookMark);
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("-----------------------------------");
-    Console.WriteLine("               MENU");
+    Console.WriteLine("               MENU                ");
     Console.WriteLine("-----------------------------------");
     Console.ResetColor();
     Console.WriteLine("1) Add book");
@@ -48,4 +48,3 @@ while (loop)
             break;
     }
 }
-
