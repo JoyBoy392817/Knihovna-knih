@@ -1,3 +1,8 @@
+# Program
+How to use:
+1) U can use numpad or normal numbers it will work just fine :)
+2) Dont be stupid and let your heart guide you 
+3) Thats all enjoy my uselless program <3
 # MIT License
 
 Copyright (c) 2023 Dadassin
