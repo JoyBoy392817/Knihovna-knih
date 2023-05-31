@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Knihovna_knih
 {
     class BookBookshelf
@@ -199,36 +198,6 @@ namespace Knihovna_knih
                 }
             }
             catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.ResetColor();
-            }
-        }
-        public void Remove()
-        {
-            Console.Clear();
-            InfoBook info = new InfoBook();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("                   Remove book");
-            Console.WriteLine("----------------------------------------------------");
-            Console.ResetColor();
-            try
-            {
-                Console.WriteLine("Write book's name: ");
-                string removedBookName = Console.ReadLine();
-                InfoBook removedBook = bookshelf.Find(info => info.Name.Contains(removedBookName));// nefunguje maže když je to prázdný
-                if (removedBook != null)
-                {
-                    bookshelf.Remove(removedBook);
-                    Console.WriteLine("Book was removed");
-                }
-                else
-                {
-                    Console.WriteLine("Book's name does not exist");
-                }
-            }
-            catch(Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Error: {ex.Message}");

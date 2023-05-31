@@ -13,29 +13,30 @@ while (loop)
     Console.ResetColor();
     Console.WriteLine("1) Add book");
     Console.WriteLine("2) Show every saved book");
-    Console.WriteLine("3) Remove book");
-    Console.WriteLine("4) Search for a book (by Author)");
-    Console.WriteLine("5) Search for a book (by Year)");
-    Console.WriteLine("6) Save & Exit");
+    Console.WriteLine("3) Search for a book (by Author)");
+    Console.WriteLine("4) Search for a book (by Year)");
+    Console.WriteLine("5) Save & Exit");
     ConsoleKeyInfo key = Console.ReadKey(true);
     switch (key.Key)
     {
         case ConsoleKey.D1:
+        case ConsoleKey.NumPad1:
             bookBookshelf.CreateNewBook();
             break;
         case ConsoleKey.D2:
+        case ConsoleKey.NumPad2:
             bookBookshelf.ShowEveryBook();
             break;
         case ConsoleKey.D3:
-            bookBookshelf.Remove();
-            break;
-        case ConsoleKey.D4:
+        case ConsoleKey.NumPad3:
             bookBookshelf.AuthorBook();
             break;
-        case ConsoleKey.D5:
+        case ConsoleKey.D4:
+        case ConsoleKey.NumPad4:
             bookBookshelf.YearBook();
             break;
-        case ConsoleKey.D6:
+        case ConsoleKey.D5:
+        case ConsoleKey.NumPad5:
             bookBookshelf.Save(bookMark);
             loop = false;
             break;
